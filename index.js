@@ -11,18 +11,6 @@ const app = express();
 // Apply middlewares
 app.use(express.json());
 
-// Define routes
-app.get('/', (req, res) => {
-    res.json('welcome home');
-});
-
-app.post('/login', (req, res) => {
-    res.json('Login successful');
-});
-
-app.patch('/products', (req, res) => {
-    res.json('You are in the products section');
-});
 
 // Listen for incoming requests
 app.listen(3000, () => {
