@@ -1,5 +1,7 @@
 import { RecipeModel } from "../models/recipe.js";
 
+
+// GET ALL
 export const getRecipes = async (req, res, next) => {
     try {
         // Get all recipes from database
@@ -11,6 +13,7 @@ export const getRecipes = async (req, res, next) => {
     }
 }
 
+// ADD 
 export const postRecipe = async (req, res, next) => {
     try {
         // Add recipe to database
@@ -23,10 +26,8 @@ export const postRecipe = async (req, res, next) => {
 
 }
 
-export const patchRecipe = (req, res) => {
-    res.json(`Recipe with Id ${req.params.id} updated`);
-}
 
+// DELETE ONE
 export const deleteRecipe = async (req, res, next) => {
 try {
     // Delete recipe by id
@@ -39,7 +40,24 @@ next (error)
 
     
 }
-
-export const getrecipe = (req, res) => {
-    res.json(`Recipe with Id ${req.params.id} selected`)
+// GET ONE
+export const getRecipe = async(req, res, next) => {
+    try {
+        const recipe = await RecipeModel.findById(req.params.id);
+        res.json(recipe)
+    } catch (error) {
+        next(error)
+    }
 }
+
+// PATCH (But i am not done)
+export const patchRecipe = async (req,res, next) => {
+   try {
+    // Update recipe by ID
+const updatedRecipe = await RecipeModel.findByIdAndUpdate(req.params.id, req.body, {new: true});
+// Return response
+res.json(updatedRecipe);
+   } catch (error) {
+    next(error)
+   }
+ }
