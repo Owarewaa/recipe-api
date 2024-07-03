@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {deleteRecipe, getRecipe, getRecipes,  patchRecipe,  postRecipe } from "../controllers/recipe.js";
-import { localUpload } from "../middlewares/uploaad.js";
+import { localUpload, remoteUpload } from "../middlewares/uploaad.js";
 
 
 // Create router
@@ -9,7 +9,7 @@ const recipeRouter = Router();
 // Define routes
 recipeRouter.get('/recipes',getRecipes);
 
-recipeRouter.post('/recipes', localUpload.single('image'), postRecipe);
+recipeRouter.post('/recipes', remoteUpload.single('image'), postRecipe);
 
 recipeRouter.delete('/recipes/:id', deleteRecipe);
 
